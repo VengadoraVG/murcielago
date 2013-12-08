@@ -1,0 +1,23 @@
+body{
+    font-family: monospace;
+    background-image: url("../img/ascii/letter.svg");
+    background-position:fixed;
+}
+
+.lex-logo{
+    margin:10px auto;
+    height: 200px;
+    align:center;
+}
+
+.menu{
+    text-align:center;
+}
+
+button{
+    background-color:none;
+    background-image:url("../img/another/button.svg");
+    color:white;
+    width:200px;
+    margin:10px;
+}

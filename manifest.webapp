@@ -1,0 +1,20 @@
+{
+"name": "murcielago",
+"version": "0.1",
+"description": "Transformas palabaras, saltando de una palabra a otra, intentando minimizar la edit-distance entre salto y salto, ideal para prevenir el Alzheimer!",
+"launch_path": "engine/menu/menu.html",
+"permissions": {
+"storage":{
+"description": "Guardo tu progreso en la memoria de tu celular :3"
+}
+},
+"developer": {
+"name": "vengadora.vg",
+"url": "bengalaa.wordpress.com"      
+},
+"icons":{
+"60": "/img/icons/lil-icon.png",
+"128": "/img/icons/big-icon.png",
+"90": "/img/icons/mid-icon.png"
+}
+}
