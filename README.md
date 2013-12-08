@@ -1,0 +1,3 @@
+El Lic. Jorge Terán nos enseñó sobre la distancia de Levenshtein (edit-distance): un algoritmo que indica el costo de transformar una palabra en otra... Mediante fuerza bruta, el algoritmo es muy tardado, por suerte, existe una solución mediante dp con una complejidad algorítmica de O(n^2). Mediante esta solución, surge este juego: un juego sobre transformación de palabras, un tanto parecido a los crucigramas :)
+
+Incompleto aún (con deadline para el lúnes :S).
