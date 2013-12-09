@@ -108,7 +108,6 @@ function startIt(current, goal){
 }
 
 function jump(){
-    if
     document.getElementById("total-ed").textContent =
 	parseInt(document.getElementById("total-ed").textContent) + 
 	parseInt(document.getElementById("temptative-ed").textContent);
@@ -147,7 +146,6 @@ window.onload = function(){
     document.getElementById("submit").onclick = function(){
 	jump();
     };
-    alert(xxx);
 };
 
 
