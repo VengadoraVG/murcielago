@@ -41,8 +41,6 @@ button{
 }
 
 .status{
-    margin:0;
-    padding:0;
     background-color:transparent;
     max-width: 500px;
     align:center;
