@@ -5,6 +5,8 @@
     <!-- bootstrap styles -->
     <link rel="stylesheet" href="../tools/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../lex.css" type="text/css" media="screen" />
+    <!-- script type="text/javascript" src="database.js"></script-->
+    <script type="text/javascript" src="../tools/jquery.js"></script>
   </head>
   <body role="application" class="menu">
     <section role="region" id="welcome-ban">
@@ -16,14 +18,10 @@
     <section role="menu" id="menu-region">
       
       ¿Listo para un reto?<br/>
-      <button type="button" 
-	      class="btn">¡Comenzar!</button> <br/>
+      <a href="../game/game.html"><button type="button" 
+	      class="btn" id="start-game">¡Estoy listo!</button></a><br/>
       <button type="button"
-	      class="btn">Configuración</button> <br/>
-      <button type="button"
-	      class="btn">Avance</button> <br/>
-      <button type="button"
-	      class="btn">¡Ayuda!</button>
+	      class="btn" id="show-help">¡Ayuda!</button>
     </section>
   </body>
 </html>

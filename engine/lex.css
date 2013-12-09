@@ -2,6 +2,16 @@ body{
     font-family: monospace;
     background-image: url("../img/ascii/letter.svg");
     background-position:fixed;
+    text-align:center;
+    font-size:small;
+    margin:0;
+    padding:0;
+}
+
+.center{
+    float:none;
+    margin-left: auto;
+    margin-right:auto;
 }
 
 .lex-logo{
@@ -21,3 +31,38 @@ button{
     width:200px;
     margin:10px;
 }
+
+.home{
+    max-height:20px;
+    max-width:50px;
+    font-size:small;
+    margin:0;
+    padding:0;
+}
+
+.status{
+    margin:0;
+    padding:0;
+    background-color:transparent;
+    max-width: 500px;
+    align:center;
+}
+
+.game-object{
+    max-width: 500px;
+}
+
+.word{
+    font-size:large;
+}
+
+.input-word{
+    max-width: 300px;
+}
+
+.resume, .history{
+    font-size:small;
+    margin:0;
+}
+
+

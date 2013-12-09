@@ -3,10 +3,26 @@
   <head>
     <meta charset="utf-8">
     <!-- bootstrap styles -->
-    <link rel="stylesheet" href="../tools/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="engine/tools/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="engine/lex.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="database.js"></script>
+    <script type="text/javascript" src="engine/tools/jquery.js"></script>
   </head>
-  <body role="application">
-    
+  <body role="application" class="menu">
+    <section role="region" id="welcome-ban">
+      <div class="logo-container">
+	<img src="img/ascii/murcielago.svg" 
+	     class="img-rounded lex-logo" />
+      </div>
+    </section>
+    <section role="menu" id="menu-region">
+      
+      ¿Listo para un reto?<br/>
+      <a href="game.html"><button type="button" 
+	      class="btn" id="start-game">¡Estoy listo!</button></a><br/>
+      <button type="button"
+	      class="btn" id="show-help">¡Ayuda!</button>
+    </section>
   </body>
 </html>
 

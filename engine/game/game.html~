@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <!-- bootstrap styles -->
+    <link rel="stylesheet" href="../tools/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../lex.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../tools/jquery.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+  </head>
+  <body role="application" class="game">
+    <section role="region" id="the-game">
+      <br/><br/>
+      <span class="current-word" id="current">???</span><br/><br/>
+      <div class="input-group input-word center">
+	<input class="form-control" 
+	       type="text" 
+	       id="word" 
+	       name="form-control" 
+	       placeholder="siguiente salto" />
+	<span class="input-group-addon">¡saltar!</span>
+      </div>
+
+      <br/><span class="goal-word" id="goal">????</span><br/><br/>
+      <div class="panel panel-default status center">
+	<div class="panel-heading status-title">
+	  Estado...
+	</div>
+	<div class="panel-body">
+	  <table class="table resume">
+	    <tr>
+	      <td>e.d. (tentativo)</td><td id="temptative-ed">??</td>
+	    </tr>
+	    <tr>
+	      <td>e.d. (restante)</td><td id="missing-ed">??</td>
+	    </tr>
+	    <tr>
+	      <td>e.d. (gastado)</td><td id="total-ed">??</td>
+	    </tr>	    
+	  </table>
+	  <strong>Historial de saltos...</strong>
+	  <table class="table history">
+	    <tr>
+	      <td>#</td><td>palabra</td><td>e.d.</td>
+	    </tr>
+	  </table>
+	</div>
+      </div>
+    </section>
+  </body>
+</html>
