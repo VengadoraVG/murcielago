@@ -14,10 +14,18 @@ body{
     margin-right:auto;
 }
 
-.lex-logo{
+.lex-logo, .difficulty{
     margin:10px auto;
     height: 200px;
     align:center;
+}
+
+.difficulty{
+    max-height:80px;
+}
+
+.dif-btn{
+    max-width:150px;
 }
 
 .menu{
