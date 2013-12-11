@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <!-- bootstrap styles -->
+    <link rel="stylesheet" href="../tools/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../lex.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../tools/jquery.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+  </head>
+  <body role="application" class="game">
+    <section role="region" id="the-game">
+      <div class="panel panel-default status center row messages">	
+	<div class="col-xs-3">
+	  <a href="../menu/menu.html">
+	    <button class ="btn home" id="home">Menú</button></a>
+	</div>
+	<div class="col-xs-6">
+	  <span id="msg">¡transforma las palabras!</span>
+	</div>
+	<div class="col-xs-3">
+	  e.d.:
+	  <span id="ed">??</span>
+	</div>
+      </div>
+      <div class="row game-object center">
+	<div class="col-xs-6 word">
+	  <span class="current-word" id="current">???</span> ->	  
+	</div>
+	<div class="col-xs-6 word">	  
+	  -> <span class="goal-word" id="goal">????</span>
+	</div>
+      </div>
+      	  <input class="form-control input-word center" 
+	       type="text" 
+	       id="word" 
+	       name="form-control" 
+	       placeholder="siguiente salto" /> 
+	  <button class="btn" id="submit">¡Saltar!</button>
+
+      <div class="panel panel-default status center">
+	<div class="panel-body">
+	  <table class="table resume">
+	    <tr>
+	      <td>e.d. (tentativo)</td><td id="temptative-ed">??</td>
+	    </tr>
+	    <tr>
+	      <td>e.d. (restante)</td><td id="missing-ed">??</td>
+	    </tr>
+	    <tr>
+	      <td>e.d. (gastado)</td><td id="total-ed">0</td>
+	    </tr>	    
+	  </table>
+	  <strong>Historial de saltos...</strong>
+	  <span id="history"></span>
+	  </table>
+	</div>
+      </div>
+    </section>
+  </body>
+</html>

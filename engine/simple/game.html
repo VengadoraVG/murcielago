@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <!-- bootstrap styles -->
+    <link rel="stylesheet" href="../tools/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../lex.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../tools/jquery.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+  </head>
+  <body role="application" class="game">
+    <section role="region" id="the-game">
+      <div class="panel panel-default status center row messages">	
+	<div class="col-xs-3">
+	  <a href="../menu/menu.html">
+	    <button class ="btn home" id="home">Menú</button></a>
+	</div>
+	<div class="col-xs-9">
+	  <span id="msg">Distancia de levenshtein</span>
+	</div>
+      </div>
+      <div class="row game-object center">
+	<div class="col-xs-6 word">
+	  <input class="form-control input-word center"
+		 type="text"
+		 id="original"
+		 placeholder="ésta palabra...">
+	</div>
+	<div class="col-xs-6 word">	  
+	  <input class="form-control input-word center"
+		 type="text"
+		 id="model"
+		 placeholder="convertirla en esta otra">
+	</div>
+      </div>
+
+      <div class="panel panel-default status center">
+	<div class="panel-body">
+	  <table class="table resume">
+	    <tr>
+	      <td>distancia de levenshtein</td><td id="ed"></td>
+	    </tr>
+	  </table>
+	  <strong>posibles candidatos...</strong>
+	  <span id="history"></span>
+	  </table>
+	</div>
+      </div>
+    </section>
+  </body>
+</html>

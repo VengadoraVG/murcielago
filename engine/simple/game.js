@@ -1,0 +1,276 @@
+
+var A = "áäâaà";
+var E = "éëêèe";
+var I = "íïîìi";
+var O = "óöôòo";
+var U = "úüûùu";
+var SAME_LETTERS = [A, E, I, O, U]
+var VOWELS = A + E + I + O + U;
+var ALIKE_LETTERS = [ "iye", 
+		      "ckqx'", 
+		      "sxcz", 
+		      "jghy", 
+		      "'kqcpt",
+		      "hfszgjvx",
+		      "mnñ",
+		      VOWELS,
+		      "uw"
+		    ];
+var MUTE_SPECIAL_RULES_LAST = [VOWELS];
+var MUTE_SPECIAL_RULES_NEXT = ["h"];
+
+var INSERTION_COST = 15;
+var DELETION_COST =15;
+var SAME_SUBSTITUTION_COST =0;
+var ALIKE_SUBSTITUTION_COST =5;
+var SUBSTITUTION_COST =20;
+var ALMOST_MUTE_INSERTION_COST =0;
+var ALMOST_MUTE_DELETION_COST =0;
+var ALMOST_MUTE_SUBSTITUTION_COST=0;
+var ALMOST_MUTE = "'hvg";
+
+var start="murcielago";
+var end="caballo";
+var resources = 100;
+var initDifferenceMin = 100;
+var initDifferenceMax = 120;
+
+var words = ["xxxx", "tanta", "t'anta", "t'onta", "tonta", "k'anta", "kanta", "kranta", "k'ranta", "hey", "tranta", "santa"];
+
+//var words = ["casa","cosa","cesa","coca","coala","cetro","caza","asa","baza","moza"];
+
+function cost_of_insertion(x, last){ 
+    
+    for(var i = 0; i<ALMOST_MUTE.length; i++){
+	for(var j=0; j<MUTE_SPECIAL_RULES_NEXT.length; j++)
+	    if(x!="")
+		if(MUTE_SPECIAL_RULES_NEXT[j].indexOf(x) !=-1 &&
+		   MUTE_SPECIAL_RULES_LAST[j].indexOf(last) !=-1){
+		    console.log("found a special rule for a mute! (insertion)", 
+				last, x);
+		    return 0; //because it is totally mute
+		}
+	
+	if(x!="")
+	    if(ALMOST_MUTE[i].indexOf(x) != -1){
+		console.log("trying to insert an almost mute character", x);
+		return  ALMOST_MUTE_INSERTION_COST;
+	    }
+    }
+
+    return INSERTION_COST;
+}
+
+function cost_of_deletion(x, last) { 
+    for(var i = 0; i<ALMOST_MUTE.length; i++){
+	for(var j=0; j<MUTE_SPECIAL_RULES_NEXT.length; j++)
+	    if(x!="")
+		if(MUTE_SPECIAL_RULES_NEXT[j].indexOf(x) !=-1 &&
+		   MUTE_SPECIAL_RULES_LAST[j].indexOf(last) !=-1){
+		    console.log("found a special rule for a mute! (deletion)", 
+				last, x);
+		    return 0; //because it is totally mute
+		}
+	if(x!="")
+	    if(ALMOST_MUTE[i].indexOf(x) != -1){
+		console.log("trying to delete an almost mute character", x);
+		return  ALMOST_MUTE_DELETION_COST;
+	    }
+    }
+
+    return DELETION_COST; 
+}
+
+function areTheSame(a, b){ //we are handling phonetically identical letters ~_^
+    if(a==b)
+	return true;
+    for(var i=0; i<SAME_LETTERS.length; i++)
+	if(SAME_LETTERS[i].indexOf(a) !=-1 && SAME_LETTERS[i].indexOf(b) !=-1)
+	    return true;
+    return false;
+}
+
+function areAlike(a, b) {
+    for(var i =0; i<ALIKE_LETTERS.length; i++){
+	if(ALIKE_LETTERS[i].indexOf(a) !=-1 && ALIKE_LETTERS[i].indexOf(b) !=-1)
+	    return true;
+    }
+    return false;
+}
+
+function isAlmostMute(a){
+    for(var i=0; i<ALMOST_MUTE.length; i++){
+
+	if(ALMOST_MUTE[i].indexOf(a) !=-1)
+	    return true;
+    }
+    return false;
+}
+
+function cost_of_substitution(a, b){
+    if(isAlmostMute(a) || isAlmostMute(b)){
+	return ALMOST_MUTE_SUBSTITUTION_COST;
+    }
+
+    if(areTheSame(a,b))
+	return SAME_SUBSTITUTION_COST;
+
+    if(areAlike(a,b))
+	return ALIKE_SUBSTITUTION_COST;
+
+    return SUBSTITUTION_COST;
+}
+
+function levenshteinDistance(original, model){
+    original = original.toLowerCase();
+    model = model.toLowerCase();
+    console.log(
+	"finding levenshtein distance between " + original + " and " + model); 
+
+    var dpm = new Array(original.length+1);    
+    for(var i=0; i<=original.length; i++)
+	dpm[i] = new Array(model.length+1);
+
+    dpm[0][0]=0;
+
+    console.log("calculating columns");
+    for(var h = 1; h<=original.length; h++){
+	var last = "";
+	if(h>1)
+	    last=original[h-2]
+	dpm[h][0] = dpm[h-1][0] + cost_of_insertion(original[h-1], last);
+	console.log("insertion of: ", original[h-1], last, dpm[h][0]);
+    }
+
+    console.log("calculating headers");
+    for(var h = 1; h<=model.length; h++){
+	dpm[0][h] = dpm[0][h-1] + 
+	    cost_of_deletion(model[h], model[h-1]);
+    }
+
+
+    console.log("calculating others...");
+    for(var currentOriginal =1; 
+	currentOriginal <=original.length; 
+	currentOriginal++){
+	for(var currentModel = 1; currentModel <= model.length; currentModel++){
+	    var last_m="";
+	    if(currentModel >1) last_m = original[currentModel-2];
+	    var curr_o=model[currentModel-1];
+
+	    //the costs of executing the operation of... 
+	    var insertion = dpm[currentOriginal][currentModel-1]
+		+ cost_of_insertion(curr_o, 
+				    last_m);
+	    console.log("insertion of: ", last_m, curr_o, insertion);
+
+
+	    var deletion = dpm[currentOriginal-1][currentModel]
+		+ cost_of_deletion(original[currentOriginal-1], 
+				   original[currentOriginal]);
+
+	    console.log("deletion of: ", original[currentOriginal], 
+			original[currentOriginal-1], deletion);
+
+
+	    var substitution = dpm[currentOriginal-1][currentModel-1]
+		+ cost_of_substitution(
+		    original[currentOriginal-1], model[currentModel-1]);
+	    console.log("substitution of: ", original[currentOriginal-1], 
+			model[currentModel-1], substitution);
+	    
+	    //choosing the cheapest between those costs...
+	    dpm[currentOriginal][currentModel] 
+		= Math.min(insertion, 
+			   Math.min(deletion, substitution));
+	}
+    }
+    var x="\n";
+    for(a =0; a<=original.length; a++){
+	for(b =0; b<=model.length; b++){
+	    x += dpm[a][b] + " ";
+	}
+	x+="\n";
+    }
+    console.log("dpm matrix of the optimal distance...");
+    console.log(x);
+
+    return dpm[original.length][model.length];
+}
+
+function shouldConsiderTheSame(x, y){
+    return areTheSame(x,y) || 
+	isAlmostMute(x) || isAlmostMute(y);
+}
+
+function equal(x, y){
+    if(x==y) return 0;
+    var cnt=0;
+    for(var i=0; i<x.length; i++){//for each letter on x
+	var sw=false;
+	for(var j=0; j<y.length; j++){//for each letter on y
+	    if(shouldConsiderTheSame(x[i],y[j])){
+		sw=true;
+//		y = y.split(x[i]).join('1');
+		break;
+	    }	    
+	}
+	if(!sw){
+	    cnt++;
+	}
+    }
+    return cnt;
+}
+
+function removeMutes(x){
+    for(var i=0; i<x.length; i++){
+	if(isAlmostMute(x[i])){
+	    x=x.split(x[i]).join('');
+	}
+    }
+    return x;
+}
+
+function searchPattern(x, k){    
+    x = removeMutes(x);
+    var set = {};
+    var cost=0;
+    var value=0;
+
+    for(var i=0; i<words.length; i++){ //for each word in the dictionary...
+	var w = removeMutes(words[i]);	
+	if(x.length+k > w.length
+	   && x.length-k <= w.length){
+	    console.log("distance between: " 
+			+ x + " and " + words[i], equal(x,w));
+	    if(equal(x, w) < k+1){
+		console.log("adding ", words[i]);
+		set[value] = words[i];
+		value++;
+	    }
+	} 	
+    }
+    return set;
+}
+
+function checkCurrentEd(){
+    var current = document.getElementById("original").value;
+    var goal = document.getElementById("model").value;    
+    
+    document.getElementById("ed").textContent = 
+	levenshteinDistance(current, goal);
+}
+
+window.onload = function(){
+    console.log("setting events...");
+    document.getElementById("original").oninput = function(){
+	checkCurrentEd();
+    };
+    document.getElementById("model").oninput = document.getElementById("original").oninput;
+    checkCurrentEd();
+    console.log(removeMutes("t'anthachhphphhh"));
+    console.log(searchPattern("t'anta", 3)[0]);
+};
+
+
+
