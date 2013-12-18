@@ -250,7 +250,7 @@ function checkCurrentEd(){
 
 window.onload = function(){
     console.log("starting...");
-//    startIt();
+    startIt();
     console.log("setting events...");
     document.getElementById("word").oninput = function(){
 	checkCurrentEd();
@@ -259,12 +259,11 @@ window.onload = function(){
 	jump();
     };
     console.log("checking first time..."); 
-//    checkCurrentEd();
+    checkCurrentEd();
     document.getElementById("msg").onclick = function(){
 	startIt();
     }
     
-    alert(levenshteinDistance("chan'ka", "chanka"));
 };
 
 
